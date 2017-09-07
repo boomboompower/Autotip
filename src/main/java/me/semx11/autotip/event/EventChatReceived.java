@@ -24,6 +24,8 @@ public class EventChatReceived {
             "\\+(?<coins>\\d+) coins for you in (?<game>.+) for being generous :\\)");
     private Pattern earnedPattern = Pattern.compile(
             "You earned (?<coins>\\d+) coins and (?<xp>\\d+) experience from (?<game>.+) tips in the last minute!");
+    private Pattern msgPattern = Pattern.compile(
+            "From (?<rank>\\[.+] )?(?<player>\\S{1,16}): (?<message>.*)");
 
     @SubscribeEvent
     public void onChat(ClientChatReceivedEvent event) {
@@ -99,6 +101,14 @@ public class EventChatReceived {
                     || msg.startsWith("Illegal characters in chat")) {
                 event.setCanceled(true);
                 LimboCommand.executed = false;
+            }
+        }
+
+        if (Autotip.afk) {
+            Matcher messageMatcher = msgPattern.matcher(msg);
+            if (messageMatcher.matches()) {
+                String player = messageMatcher.group("player");
+                MessageUtil.sendCommand("/msg " + player + " I\'m currently afk!");
             }
         }
 

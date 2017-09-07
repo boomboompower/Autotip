@@ -55,6 +55,7 @@ public class Autotip {
     public static MessageOption messageOption = MessageOption.SHOWN;
     public static boolean onHypixel = false;
     public static boolean toggle = true;
+    public static boolean afk = false;
 
     public static int totalTipsSent;
 

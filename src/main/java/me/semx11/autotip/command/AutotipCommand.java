@@ -173,6 +173,11 @@ public class AutotipCommand extends AUniversalCommand {
                             .getUnformattedText(EventClientConnection.getHeader()));
                     MessageUtil.separator();
                     break;
+                case "afk":
+                    MessageUtil.send(
+                            "AFK: " + ((Autotip.afk = !Autotip.afk) ? ChatColor.GREEN + "En"
+                                    : ChatColor.RED + "Dis") + "abled");
+                    break;
                 default:
                     MessageUtil.send(ChatColor.RED + "Usage: " + getCommandUsage(sender));
                     break;
